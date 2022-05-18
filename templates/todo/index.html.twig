@@ -1,19 +1,40 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <div class="header">
-      <h2>Symfony CRUD List App</h2>
-      {# <form action="{{ path('create_task') }}" method="post">
-        <input type="text" name="title" id="myInput" placeholder="Task title..." />
-        <button type="submit" class="addBtn">Add a task</button>
-      </form> #}
-    </div>
+  <div class="container">
+    <header>
+      <h1>Team Stationary to-do list</h1>
 
-    {# <ul>
-      {% for task in tasks %}
-      <li {% if task.status %} class="checked" {% endif %}>
-        <a href="{{path('update_task', {'id': task.id})}}"> <span class="task-list-item">{{task.title}}</span> </a
-        ><a onclick="return confirm('Are you want sure to delete?')" href="{{path('delete_task', {'id': task.id})}}"><span class="close">X</span></a>
+      <p>Add a new to-do item to the list:</p>
+
+      <form class="add-todo" action="{{ path('create_todo') }}" method="post">
+        <div class="form-group">
+          <input type="text" name="title" id="myInput" placeholder="Enter a to-do..." />
+          <button type="submit" class="todo-btn">
+            <i class="fa-regular fa-square-plus"></i>
+          </button>
+        </div>
+      </form>
+    </header>
+
+
+    <ul>
+
+      {% for todo in todos %}
+      <li class="todos-list-item">
+        <span {% if todo.status %} class="complete" {% endif %}>{{todo.title}}</span>
+        <div class="icon-group">
+          <a href="{{path('update_todo', {'id': todo.id})}}">
+            <i {% if todo.status %}
+                  class="fa-regular fa-square-check"
+              {% else %} 
+                  class="fa-regular fa-square"
+              {% endif %} ></i></a>
+          <a onclick="return confirm('For real, you wanna delete that one?')" href="{{path('delete_todo', {'id': todo.id})}}">
+            <i class="fa-regular fa-trash-can delete"></i></a>
+        </div>
       </li>
       {% endfor %}
-    </ul> #}
+
+    </ul>
+  </div>
 {% endblock %}
