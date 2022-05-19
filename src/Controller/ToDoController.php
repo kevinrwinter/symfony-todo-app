@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ToDoController extends AbstractController {
     #[Route('/todos', name: 'app_to_do')]
     public function index(EntityManagerInterface $em): Response {
-        $todos = $em->getRepository(Todo::class)->findBy([], ['id'=>'ASC']);
+        $todos = $em->getRepository(Todo::class)->findBy([], ['id'=>'DESC']);
         return $this->render('todo/index.html.twig', ['todos'=>$todos]);
     }
     
